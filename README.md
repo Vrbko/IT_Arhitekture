@@ -1,4 +1,4 @@
-# IT_Arhitekture
+# IT_Arhitekture - Naročanje avtomobilskih delov
 <img src="slika.svg">
 
 # **Pregled sistema**
