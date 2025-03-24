@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:3000/api
 paths:
-  /part:
+  /parts:
     post:
       summary: Create a new car part
       description: Creates a new car part in the database.
@@ -64,7 +64,7 @@ paths:
         500:
           description: Internal server error
 
-  /car-parts/{partNumber}:
+  /parts/{partNumber}:
     get:
       summary: Get a car part by part number
       description: Retrieves a car part by its part number.
