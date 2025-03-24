@@ -77,3 +77,49 @@ test-results/
 
 # Miscellaneous IDE files
 *.swp
+
+
+
+# Bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual environment directories
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE/editor folders and settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python egg and distribution files
+*.egg
+*.egg-info/
+dist/
+build/
+*.tar.gz
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Python version manager files
+.python-version

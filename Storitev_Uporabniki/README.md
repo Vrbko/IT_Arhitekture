@@ -8,3 +8,6 @@
 - Povezana s svojo **bazo podatkov**, kjer hrani uporabniške podatke.  
 - Komunicira z **uporabniškim vmesnikom** prek **gRPC** ali **REST API**.  
 - Daje informacije storitvi **naročanje avto delov**, ki preverja identiteto uporabnika pred zaključkom naročila.  
+
+
+<img src="swagger.png">

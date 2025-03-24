@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package user;
+
+// The user service definition.
+service UserService {
+  // Create a new user
+  rpc CreateUser (UserRequest) returns (UserResponse);
+  
+  // Retrieve a user by ID
+  rpc GetUser (UserRequest) returns (UserResponse);
+  
+  // Login (check password)
+  rpc Login (LoginRequest) returns (LoginResponse);
+}
+
+// The request message containing the user information for creation.
+message UserRequest {
+  string username = 1;
+  string email = 2;
+  int32 age = 3;
+  string password = 4;  // Password field for creating a user
+  int32 user_id = 5;  // For GetUser request, to retrieve user by ID
+}
+
+// The response message with the user details for creation.
+message UserResponse {
+  int32 user_id = 1;
+  string username = 2;
+  string email = 3;
+  int32 age = 4;
+  string message = 5;  // For CreateUser response or error message
+}
+
+// The request message for user login.
+message LoginRequest {
+  string username = 1;
+  string password = 2;  // Password to validate for login
+}
+
+// The response message for user login.
+message LoginResponse {
+  bool success = 1;  // Indicates if login is successful
+  string message = 2;  // Login success/failure message
+}

@@ -9,3 +9,9 @@ services:
     environment:
       - MONGO_URI=${MONGO_URI}  # Using MONGO_URI from the .env file
 
+
+  uporabniki:
+    build:
+      context: Storitev_Uporabniki/.
+    ports:
+      - "50051:50051"
