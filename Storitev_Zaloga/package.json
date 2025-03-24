@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node app.js",
     "run": "npm start",
-    "test": "jest",
-    "test:ci": "jest"
+    "test": "jest --coverage --watchAll=false --detectOpenHandles --forceExit",
+    "test:ci": "jest --coverage --watchAll=false --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "",

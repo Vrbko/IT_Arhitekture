@@ -36,8 +36,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/parts', carPartsRoutes);
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.resolve();
 
 // Load swagger.yaml
 const swaggerDocument = YAML.load(path.join(__dirname, 'public', 'swagger.yaml'));
