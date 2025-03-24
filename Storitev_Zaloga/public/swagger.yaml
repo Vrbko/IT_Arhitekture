@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  title: Car Parts API
+  version: 1.0.0
+  description: API for managing car parts.
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /part:
+    post:
+      summary: Create a new car part
+      description: Creates a new car part in the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the car part
+                partNumber:
+                  type: string
+                  description: The unique part number of the car part
+                category:
+                  type: string
+                  description: The category of the car part
+                manufacturer:
+                  type: string
+                  description: The manufacturer of the car part
+                price:
+                  type: number
+                  format: float
+                  description: The price of the car part
+                stock:
+                  type: integer
+                  description: The stock quantity of the car part
+                description:
+                  type: string
+                  description: A description of the car part
+      responses:
+        201:
+          description: Car part created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarPart'
+        400:
+          description: Bad request (e.g., invalid data)
+
+    get:
+      summary: Get all car parts
+      description: Retrieves all car parts from the database.
+      responses:
+        200:
+          description: A list of car parts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarPart'
+        500:
+          description: Internal server error
+
+  /car-parts/{partNumber}:
+    get:
+      summary: Get a car part by part number
+      description: Retrieves a car part by its part number.
+      parameters:
+        - name: partNumber
+          in: path
+          required: true
+          description: The part number of the car part to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Car part found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarPart'
+        404:
+          description: Car part not found
+        500:
+          description: Internal server error
+
+    put:
+      summary: Update a car part by part number
+      description: Updates an existing car part by its part number.
+      parameters:
+        - name: partNumber
+          in: path
+          required: true
+          description: The part number of the car part to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                partNumber:
+                  type: string
+                category:
+                  type: string
+                manufacturer:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                stock:
+                  type: integer
+                description:
+                  type: string
+      responses:
+        200:
+          description: Car part updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarPart'
+        404:
+          description: Car part not found
+        400:
+          description: Bad request
+
+    delete:
+      summary: Delete a car part by part number
+      description: Deletes a car part by its part number.
+      parameters:
+        - name: partNumber
+          in: path
+          required: true
+          description: The part number of the car part to delete
+          schema:
+            type: string
+      responses:
+        200:
+          description: Car part deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Car part deleted
+        404:
+          description: Car part not found
+        500:
+          description: Internal server error
+
+components:
+  schemas:
+    CarPart:
+      type: object
+      properties:
+        name:
+          type: string
+        partNumber:
+          type: string
+        category:
+          type: string
+        manufacturer:
+          type: string
+        price:
+          type: number
+          format: float
+        stock:
+          type: integer
+        description:
+          type: string
+        dateAdded:
+          type: string
+          format: date-time
