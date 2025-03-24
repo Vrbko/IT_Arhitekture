@@ -34,7 +34,7 @@ def test_get_user_success(stub):
     user_id = cursor.fetchone()[0]
     conn.close()
 
-    request = user_pb2.UserGetRequest(user_id=user_id)
+    request = user_pb2.UserRequest(user_id=user_id)
     response = stub.GetUser(request)
     print(response)
     assert response.user_id == user_id
@@ -42,7 +42,7 @@ def test_get_user_success(stub):
     assert response.message == "User fetched successfully"
 
 def test_get_user_not_found(stub):
-    request = user_pb2.UserGetRequest(user_id=9999)  # Non-existing user
+    request = user_pb2.UserRequest(user_id=9999)  # Non-existing user
     response = stub.GetUser(request)
     print(response)
     assert response.user_id == 0
