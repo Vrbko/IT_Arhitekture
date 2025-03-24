@@ -33,6 +33,10 @@ jobs:
         pip install typing_extensions==4.12.2
         pip install pytest  # Install pytest
 
+    - name: Generate Python files from .proto
+      run: |
+        python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. user.proto
+    
     - name: Run server (in background)
       run: |
         nohup python server.py &  # Run the server in the background
@@ -40,4 +44,4 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest Storitev_Uporabniki/test/test_server.py  # Run the tests
+        pytest Storitev_Uporabniki/test_server.py  # Run the tests
