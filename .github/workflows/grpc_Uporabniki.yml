@@ -35,13 +35,16 @@ jobs:
 
     - name: Generate Python files from .proto
       run: |
+        cd Storitev_Uporabniki
         python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. user.proto
     
     - name: Run server (in background)
       run: |
+        cd Storitev_Uporabniki
         nohup python server.py &  # Run the server in the background
         sleep 10  # Wait for the server to start
 
     - name: Run tests
       run: |
+        cd Storitev_Uporabniki
         pytest Storitev_Uporabniki/test_server.py  # Run the tests
