@@ -40,4 +40,4 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest test/test_server.py  # Run the tests
+        pytest Storitev_Uporabniki/test/test_server.py  # Run the tests
