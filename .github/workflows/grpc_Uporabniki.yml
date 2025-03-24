@@ -47,4 +47,4 @@ jobs:
     - name: Run tests
       run: |
         cd Storitev_Uporabniki
-        pytest Storitev_Uporabniki/test_server.py  # Run the tests
+        pytest test_server.py  # Run the tests
