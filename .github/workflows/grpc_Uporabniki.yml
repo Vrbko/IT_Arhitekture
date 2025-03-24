@@ -31,6 +31,7 @@ jobs:
         pip install bcrypt==4.3.0
         pip install SQLAlchemy==2.0.39
         pip install typing_extensions==4.12.2
+        pip install pytest  # Install pytest
 
     - name: Run server (in background)
       run: |
