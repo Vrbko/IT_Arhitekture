@@ -88,3 +88,5 @@ jobs:
       with:
         name: backend-coverage  # Ime artefakta
         path: Storitev_Zaloga/coverage/  # Pot do poročila o pokritosti kode
+
+
