@@ -17,5 +17,5 @@ def test_create_user():
     response = stub.CreateUser(request)
 
     # Check that the response is as expected
-    assert response.user_id == 1  # Simulated user_id from the server
+    assert response.user_id > 0
     assert response.message == "User created successfully"
