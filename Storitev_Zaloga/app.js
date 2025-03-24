@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import logger from './logger.js'; // Import the logger you created
 
 dotenv.config();  // Load environment variables
 
@@ -31,6 +32,23 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch((err) => {
     console.error('MongoDB connection error:', err);
   });
+
+
+
+// Middleware to log all requests
+app.use((req, res, next) => {
+  // Log the HTTP method, URL, and timestamp
+  logger.info(`Request: ${req.method} ${req.url} - ${new Date().toISOString()}`);
+
+  // Log the request body (optional)
+  logger.info(`Body: ${JSON.stringify(req.body)}`);
+
+  // Continue processing the request
+  next();
+});
+
+// Parse JSON bodies
+app.use(express.json());
 
 // API Routes
 app.use('/parts', carPartsRoutes);
