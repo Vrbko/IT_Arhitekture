@@ -10,5 +10,8 @@
     "minimum-stability": "alpha",
     "require": {
         "predis/predis": "^3.0@alpha"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.1"
     }
 }

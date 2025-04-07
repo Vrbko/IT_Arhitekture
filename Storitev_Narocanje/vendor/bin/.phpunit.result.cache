@@ -1,0 +1,1 @@
+{"version":1,"defects":{"RedisWorkflowTest::testWriteAndReadFromRedis":8,"RedisWorkflowTest::testDeleteKeyFromRedis":7,"RedisWorkflowTest::testTransaction":8},"times":{"RedisWorkflowTest::testWriteAndReadFromRedis":0.013,"RedisWorkflowTest::testDeleteKeyFromRedis":0.005,"RedisWorkflowTest::testTransaction":0.004}}
