@@ -1,12 +1,11 @@
-
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+
 use PHPUnit\Framework\TestCase;
 use Predis\Client;
 
-class RedisWorkflowTest extends TestCase
+class RedisWorkflowTestTwo extends TestCase
 {
-   private Client $redis;
+    private Client $redis;
 
     protected function setUp(): void
     {
@@ -43,8 +42,11 @@ class RedisWorkflowTest extends TestCase
             $pubsub = $redisSub->pubSubLoop();
             $pubsub->subscribe($channel);
 
+            echo "Subscriber waiting for message...\n";
+
             foreach ($pubsub as $message) {
                 if ($message->kind === 'message') {
+                    echo "Received message: {$message->payload}\n";
                     file_put_contents('/tmp/redis_test_output.json', $message->payload);
                     break;
                 }
@@ -53,6 +55,8 @@ class RedisWorkflowTest extends TestCase
         } else {
             // Parent process: publish after delay
             sleep(1); // wait for subscriber to connect
+            echo "Publishing message to channel '$channel':\n";
+            echo json_encode($testOrder) . "\n";
             $this->redis->publish($channel, json_encode($testOrder));
             sleep(2); // give time for subscriber to receive
             $output = file_get_contents('/tmp/redis_test_output.json');
@@ -63,8 +67,12 @@ class RedisWorkflowTest extends TestCase
             pcntl_wait($status);
         }
 
+        echo "Received message from Redis:\n";
+        print_r($receivedMessage);
+
         $this->assertNotNull($receivedMessage, "Message was not received.");
         $this->assertEquals($testOrder['order_id'], $receivedMessage['order_id']);
         $this->assertEquals($testOrder['part_name'], $receivedMessage['part_name']);
     }
-}?>
+}
+?>

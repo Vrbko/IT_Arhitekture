@@ -1,6 +1,20 @@
 # IT_Arhitekture - Naročanje avtomobilskih delov
 <img src="slika.svg">
 
+# **Dokumentacija**
+**Zaloga_API**
+
+http://localhost:3000/
+
+**Uporabniki_gRPC**
+
+http://localhost:8000/documentation_grpc
+
+**Narocilo_Redis**
+
+http://localhost:8000/documentation
+
+
 # **Pregled sistema**
 
 Sistem je zasnovan kot distribuirana arhitektura, kjer več mikroservisov sodeluje za omogočanje funkcionalnosti naročanja in upravljanja avtomobilskih delov. Komunikacija med storitvami poteka prek **REST API** in **gRPC**, pri čemer se v določenih primerih uporablja **sporočilni posrednik**.

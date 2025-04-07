@@ -40,6 +40,7 @@ jobs:
       run: |
         cd Storitev_Narocanje
         ./vendor/bin/phpunit tests/RedisWorkflowTest.php
+        ./vendor/bin/phpunit tests/RedisWorkflowTestTwo.php
       env:
         REDIS_HOST: localhost
         REDIS_PORT: 6379
