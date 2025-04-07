@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: Order API
+  version: 1.0.0
+  description: Simple API to place orders and publish them to Redis.
+
+paths:
+  /API.php:
+    post:
+      summary: Create a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - part_name
+                - quantity
+                - part_no
+              properties:
+                part_name:
+                  type: string
+                quantity:
+                  type: integer
+                part_no:
+                  type: string
+      responses:
+        '200':
+          description: Order placed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  order_id:
+                    type: integer
