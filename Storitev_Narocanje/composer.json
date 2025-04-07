@@ -1,0 +1,14 @@
+{
+    "name": "vrbko/narocanje",
+    "description": "Redis narocanje avtodelov",
+    "type": "project",
+    "authors": [
+        {
+            "name": "y"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "predis/predis": "^3.0@alpha"
+    }
+}
