@@ -39,10 +39,10 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use((req, res, next) => {
   // Log the HTTP method, URL, and timestamp
   logger.info(`Request: ${req.method} ${req.url} - ${new Date().toISOString()}`);
-
+  
   // Log the request body (optional)
   logger.info(`Body: ${JSON.stringify(req.body)}`);
-
+  
   // Continue processing the request
   next();
 });

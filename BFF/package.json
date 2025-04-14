@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.3",
+    "amqplib": "^0.10.7",
+    "axios": "^1.8.4",
+    "express": "^5.1.0"
+  }
+}
