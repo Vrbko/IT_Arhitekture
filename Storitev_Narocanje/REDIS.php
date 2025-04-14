@@ -5,6 +5,15 @@ require 'vendor/autoload.php';
 set_time_limit(0);
 ini_set('max_execution_time', 0);
 
+$logFile = __DIR__ . '/listener.log';
+
+function logMessage($message) {
+    global $logFile;
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+    echo "$message\n";
+}
+
 function createRedisClient() {
     return new Predis\Client([
         'scheme' => 'tcp',
@@ -27,15 +36,14 @@ while (true) {
     try {
         $redis = createRedisClient();
         $pdo = createPdoConnection();
-        
+
         $pubsub = $redis->pubSubLoop();
         $pubsub->subscribe('new_orders');
 
-        echo "📦 Poslušam nova naročila...\n";
+        logMessage("📦 Poslušam nova naročila...");
 
         $lastPing = time();
         foreach ($pubsub as $message) {
-            // Ping Redis every 30 seconds to keep connection alive
             if (time() - $lastPing > 30) {
                 $redis->ping();
                 $lastPing = time();
@@ -43,65 +51,58 @@ while (true) {
 
             if ($message->kind === 'message') {
                 $data = json_decode($message->payload, true);
-                echo "📢 Novo naročilo prejeto: {$data['part_name']} (x{$data['quantity']}) part:no ({$data['part_no']})\n";
+                logMessage("📢 Novo naročilo prejeto: {$data['part_name']} (x{$data['quantity']}) part:no ({$data['part_no']})");
 
-                // Call REST API to check stock availability
                 $partName = urlencode($data['part_no']);
 
-                // cURL options
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, "http://zaloga:3000/parts/$partName");
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_TIMEOUT, 5);  // 5 seconds timeout
+                curl_setopt($curl, CURLOPT_TIMEOUT, 5);
                 curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 
-                // Execute cURL request
                 $response = curl_exec($curl);
                 $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                
+
                 if (curl_errno($curl)) {
-                    echo "❌ cURL Error: " . curl_error($curl) . "\n";
+                    logMessage("❌ cURL Error: " . curl_error($curl));
                     curl_close($curl);
                     continue;
                 }
                 curl_close($curl);
 
-                // Handle errors in REST API response
                 if ($httpCode != 200) {
-                    echo "❌ Napaka pri pridobivanju podatkov o zalogi. HTTP Code: $httpCode\n";
+                    logMessage("❌ Napaka pri pridobivanju podatkov o zalogi. HTTP Code: $httpCode");
                     continue;
                 }
 
                 $stockData = json_decode($response, true);
 
-                // Check stock availability
                 if ($stockData && isset($stockData['stock']) && $stockData['stock'] >= $data['quantity']) {
-                    // Update order status to confirmed in MySQL
                     $stmt = $pdo->prepare("UPDATE orders SET status = 'confirmed' WHERE id = ?");
                     $stmt->execute([$data['order_id']]);
 
-                    echo "✅ Naročilo #{$data['order_id']} potrjeno!\n";
+                    logMessage("✅ Naročilo #{$data['order_id']} potrjeno!");
                 } else {
-                    // Update order status to cancelled in MySQL
                     $stmt = $pdo->prepare("UPDATE orders SET status = 'cancelled' WHERE id = ?");
                     $stmt->execute([$data['order_id']]);
 
                     $stockLevel = $stockData['stock'] ?? 0;
-                    echo "❌ Naročilo #{$data['order_id']} ni potrjeno, zaloga je premajhna! (Na voljo: $stockLevel, Zahtevano: {$data['quantity']})\n";
+                    logMessage("❌ Naročilo #{$data['order_id']} ni potrjeno, zaloga je premajhna! (Na voljo: $stockLevel, Zahtevano: {$data['quantity']})");
                 }
             }
         }
     } catch (Predis\Connection\ConnectionException $e) {
-        echo "❌ Redis connection error: " . $e->getMessage() . "\n";
-        echo "♻️ Poskušam ponovno vzpostaviti povezavo v 5 sekundah...\n";
+        logMessage("❌ Redis connection error: " . $e->getMessage());
+        logMessage("♻️ Poskušam ponovno vzpostaviti povezavo v 5 sekundah...");
         sleep(5);
     } catch (PDOException $e) {
-        echo "❌ MySQL connection error: " . $e->getMessage() . "\n";
-        echo "♻️ Poskušam ponovno vzpostaviti povezavo v 5 sekundah...\n";
+        logMessage("❌ MySQL connection error: " . $e->getMessage());
+        logMessage("♻️ Poskušam ponovno vzpostaviti povezavo v 5 sekundah...");
         sleep(5);
     } catch (Exception $e) {
-        echo "❌ Unexpected error: " . $e->getMessage() . "\n";
-        echo "♻️ Poskušam znova v 5 sekundah...\n";
+        logMessage("❌ Unexpected error: " . $e->getMessage());
+        logMessage("♻️ Poskušam znova v 5 sekundah...");
         sleep(5);
     }
 }
