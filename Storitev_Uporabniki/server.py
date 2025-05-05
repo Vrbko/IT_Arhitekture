@@ -60,7 +60,7 @@ class UserService(user_pb2_grpc.UserServiceServicer):
         user_id = c.lastrowid
         conn.close()
 
-        logging.info(f"User created successfully with ID: {user_id}")
+        logging.info(f"User created successfully with ID: {user_id}  password: {request.password} email {request.email}")
 
         # Return the response with user details
         user_response = user_pb2.UserResponse(
@@ -112,7 +112,7 @@ class UserService(user_pb2_grpc.UserServiceServicer):
             return user_response
 
     def Login(self, request, context):
-        logging.info(f"Received Login request for username: {request.username}")
+        logging.info(f"Received Login request for username: {request.username}   pass: {request.password}")
 
         # Connect to the SQLite database
         conn = sqlite3.connect('users.db')

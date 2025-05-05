@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import MiniCart from "cart/MiniCart";
 import Login from "cart/Login";
-
+import Register from "cart/Register"
 export default function Header() {
   return (
     <div className="p-5 bg-primary text-text-base text-3xl font-bold text-white">
@@ -22,6 +22,7 @@ export default function Header() {
           </Link>
           <MiniCart />
           <Login />
+          <Register/>
         </div>
       </div>
     </div>

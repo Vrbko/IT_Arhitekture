@@ -8,3 +8,99 @@
 2025-03-24 14:52:15,853 - INFO - Server started on port 50051...
 2025-03-24 15:15:58,680 - INFO - Server started on port 50051...
 2025-03-24 15:16:37,517 - INFO - Server started on port 50051...
+2025-05-05 18:34:06,113 - INFO - Server started on port 50051...
+2025-05-05 18:34:25,010 - INFO - Received CreateUser request for username: rene2
+2025-05-05 18:34:25,245 - INFO - User created successfully with ID: 6
+2025-05-05 18:34:25,246 - INFO - Received Login request for username: rene2
+2025-05-05 18:34:25,480 - INFO - Login successful for username: rene2
+2025-05-05 18:34:25,481 - INFO - Received GetUser request for user_id: 6
+2025-05-05 18:34:25,481 - INFO - User fetched successfully: (6, 'rene2', 'john.doe@example.com', 30, b'$2b$12$w6bjhdDKtskekAJfqPClB.lK0PzNVd4J5vrOFH.47gnH/H1yQR1rm')
+2025-05-05 18:34:44,043 - INFO - Received CreateUser request for username: rene2
+2025-05-05 18:34:44,277 - ERROR - Exception calling application: no such table: users
+Traceback (most recent call last):
+  File "/Users/renevrbnjak/it/Storitev_Uporabniki/venv/lib/python3.13/site-packages/grpc/_server.py", line 610, in _call_behavior
+    response_or_iterator = behavior(argument, context)
+  File "/Users/renevrbnjak/it/Storitev_Uporabniki/server.py", line 51, in CreateUser
+    c.execute('''
+    ~~~~~~~~~^^^^
+        INSERT INTO users (username, email, age, password)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (?, ?, ?, ?)
+        ^^^^^^^^^^^^^^^^^^^
+    ''', (request.username, request.email, request.age, hashed_password))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: users
+2025-05-05 18:34:47,177 - INFO - Received CreateUser request for username: rene2
+2025-05-05 18:34:47,410 - ERROR - Exception calling application: no such table: users
+Traceback (most recent call last):
+  File "/Users/renevrbnjak/it/Storitev_Uporabniki/venv/lib/python3.13/site-packages/grpc/_server.py", line 610, in _call_behavior
+    response_or_iterator = behavior(argument, context)
+  File "/Users/renevrbnjak/it/Storitev_Uporabniki/server.py", line 51, in CreateUser
+    c.execute('''
+    ~~~~~~~~~^^^^
+        INSERT INTO users (username, email, age, password)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (?, ?, ?, ?)
+        ^^^^^^^^^^^^^^^^^^^
+    ''', (request.username, request.email, request.age, hashed_password))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: users
+2025-05-05 18:34:50,152 - INFO - Server started on port 50051...
+2025-05-05 18:34:52,485 - INFO - Received CreateUser request for username: rene2
+2025-05-05 18:34:52,719 - INFO - User created successfully with ID: 1
+2025-05-05 18:34:52,720 - INFO - Received Login request for username: rene2
+2025-05-05 18:34:52,954 - INFO - Login successful for username: rene2
+2025-05-05 18:34:52,954 - INFO - Received GetUser request for user_id: 1
+2025-05-05 18:34:52,955 - INFO - User fetched successfully: (1, 'rene2', 'john.doe@example.com', 30, b'$2b$12$O.8vxMGTEyXm/QvyFyLKleuYU2CjsJNa.vyu63Ayej0Z/RjV23Xp2')
+2025-05-05 18:35:11,881 - INFO - Received Login request for username: rene2
+2025-05-05 18:35:12,145 - INFO - Login successful for username: rene2
+2025-05-05 18:35:12,153 - INFO - Received GetUser request for user_id: 0
+2025-05-05 18:35:12,154 - WARNING - User with ID 0 not found.
+2025-05-05 18:35:23,907 - INFO - Received Login request for username: 2
+2025-05-05 18:35:23,910 - WARNING - User with username 2 not found.
+2025-05-05 18:35:49,408 - INFO - Received CreateUser request for username: 2
+2025-05-05 18:35:49,679 - INFO - User created successfully with ID: 2
+2025-05-05 18:36:00,066 - INFO - Received Login request for username: 2
+2025-05-05 18:36:00,329 - WARNING - Incorrect password for username: 2
+2025-05-05 18:36:00,527 - INFO - Received Login request for username: 2
+2025-05-05 18:36:00,789 - WARNING - Incorrect password for username: 2
+2025-05-05 18:36:37,076 - INFO - Received CreateUser request for username: 2
+2025-05-05 18:36:37,344 - INFO - User created successfully with ID: 3
+2025-05-05 18:37:22,235 - INFO - Server started on port 50051...
+2025-05-05 18:37:27,653 - INFO - Received CreateUser request for username: 2
+2025-05-05 18:37:27,915 - INFO - User created successfully with ID: 4  
+2025-05-05 18:37:39,825 - INFO - Server started on port 50051...
+2025-05-05 18:37:42,159 - INFO - Received CreateUser request for username: rene2
+2025-05-05 18:37:42,393 - INFO - User created successfully with ID: 5  password: rene2
+2025-05-05 18:37:42,394 - INFO - Received Login request for username: rene2
+2025-05-05 18:37:42,628 - INFO - Login successful for username: rene2
+2025-05-05 18:37:42,629 - INFO - Received GetUser request for user_id: 5
+2025-05-05 18:37:42,629 - INFO - User fetched successfully: (5, 'rene2', 'john.doe@example.com', 30, b'$2b$12$icCniWYzoAM6AdtU4PuhMen.Kjv9td.JYRlX05/PggJdalVuwoGHm')
+2025-05-05 18:37:57,766 - INFO - Received CreateUser request for username: 2
+2025-05-05 18:37:58,031 - INFO - User created successfully with ID: 6  password: 
+2025-05-05 18:39:30,437 - INFO - Server started on port 50051...
+2025-05-05 18:39:33,770 - INFO - Received CreateUser request for username: 2
+2025-05-05 18:39:34,035 - INFO - User created successfully with ID: 7  password:  email s
+2025-05-05 18:40:31,812 - INFO - Received CreateUser request for username: qwe
+2025-05-05 18:40:32,090 - INFO - User created successfully with ID: 8  password:  email qwe
+2025-05-05 18:41:32,202 - INFO - Received CreateUser request for username: qwe
+2025-05-05 18:41:32,473 - INFO - User created successfully with ID: 9  password: qwe email qwe
+2025-05-05 18:41:37,704 - INFO - Received Login request for username: qwe
+2025-05-05 18:41:37,981 - WARNING - Incorrect password for username: qwe
+2025-05-05 18:41:39,977 - INFO - Received Login request for username: qwe
+2025-05-05 18:41:40,253 - WARNING - Incorrect password for username: qwe
+2025-05-05 18:42:10,417 - INFO - Received Login request for username: john_doe
+2025-05-05 18:42:10,421 - WARNING - User with username john_doe not found.
+2025-05-05 18:42:19,622 - INFO - Received Login request for username: rene2
+2025-05-05 18:42:19,900 - INFO - Login successful for username: rene2
+2025-05-05 18:42:19,906 - INFO - Received GetUser request for user_id: 0
+2025-05-05 18:42:19,906 - WARNING - User with ID 0 not found.
+2025-05-05 18:43:26,663 - INFO - Server started on port 50051...
+2025-05-05 18:43:29,637 - INFO - Received CreateUser request for username: 2
+2025-05-05 18:43:29,911 - INFO - User created successfully with ID: 10  password: 2 email s
+2025-05-05 18:43:38,345 - INFO - Received Login request for username: 2   pass: 2
+2025-05-05 18:43:38,624 - WARNING - Incorrect password for username: 2
+2025-05-05 18:43:55,196 - INFO - Received Login request for username: rene2   pass: rene2
+2025-05-05 18:43:55,460 - INFO - Login successful for username: rene2
+2025-05-05 18:43:55,465 - INFO - Received GetUser request for user_id: 0
+2025-05-05 18:43:55,465 - WARNING - User with ID 0 not found.

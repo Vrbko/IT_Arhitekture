@@ -11,4 +11,11 @@ export class AppController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
+
+
+  @Post('auth/register')
+  async register(@Request() req) {
+    console.log("auth/resgiter " , req.body);
+    return this.authService.register(req.body);
+  }
 }

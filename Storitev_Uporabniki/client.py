@@ -7,12 +7,12 @@ def run():
     stub = user_pb2_grpc.UserServiceStub(channel)
 
     # Create a new user with a password
-    user_request = user_pb2.UserRequest(username="john_doe", email="john.doe@example.com", age=30, password="securepassword")
+    user_request = user_pb2.UserRequest(username="aaa", email="aaa.com", age=30, password="aaa")
     response = stub.CreateUser(user_request)
     print(f"CreateUser Response: {response.message}, User ID: {response.user_id}")
 
     # Login with username and password
-    login_request = user_pb2.LoginRequest(username="john_doe", password="securepassword")
+    login_request = user_pb2.LoginRequest(username="aaa", password="aaa")
     login_response = stub.Login(login_request)
     print(f"Login Response: {login_response.message}, Success: {login_response.success}")
 

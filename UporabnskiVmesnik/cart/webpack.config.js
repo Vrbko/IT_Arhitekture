@@ -51,6 +51,7 @@ module.exports = {
       exposes: {
         "./cart": "./src/cart.js",
         "./Login": "./src/Login.jsx",
+        "./Register": "./src/Register.jsx",
         "./MiniCart": "./src/MiniCart.jsx",
         "./CartContent": "./src/CartContent.jsx",
       },
