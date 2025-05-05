@@ -94,10 +94,11 @@ export function useLoggedIn() {
   return loggedIn;
 }
 
-export const postCartData = () => {
+export const postCartData = async () => {
+  console.log("we here?");
   // Get the cart data (assuming the cart is stored in a variable called `cart`)
-  const cartData = getCartData();  // Replace with your method of fetching cart data
-
+  const cartData = await getCart();
+console.log("here data", JSON.stringify(cartData));
   // Check if cart data exists
   if (!cartData || cartData.length === 0) {
     console.log("Cart is empty");
@@ -105,7 +106,7 @@ export const postCartData = () => {
   }
   console.log(cartData);
   // Make a POST request to send cart data to the API
-  return fetch(`${API_SERVER}/cart`, {
+  return fetch(`${API_SERVER}/cart/checkout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

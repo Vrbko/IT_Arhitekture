@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { cart, clearCart } from "./cart";
+import { cart, clearCart,postCartData } from "./cart";
 import { currency } from "home/products";
 
 export default function MiniCart() {
@@ -60,8 +60,9 @@ export default function MiniCart() {
               </div>
               <div className="flex-end">
                 <button
+                     id="postcart"
                   className="bg-green-900 text-white py-2 px-5 rounded-md text-sm"
-                  onClick={clearCart}
+                  onClick={postCartData}
                 >
                   Zaključi
                 </button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { cart, clearCart } from "cart/cart";
+import { cart, clearCart,postCartData } from "cart/cart";
 
 export default function CartContent() {
   const [items, setItems] = useState([]);
@@ -59,8 +59,9 @@ export default function CartContent() {
   Počisti Košarico
 </button>
 <button
+  id="postcart"
   className="bg-green-900 text-white py-3 px-8 rounded-md text-sm font-semibold hover:bg-green-800 transition ease-in-out duration-300 shadow-lg transform hover:scale-105"
-  onClick={clearCart}
+  onClick={postCartData}
 >
   Zaključi Naročilo
 </button>

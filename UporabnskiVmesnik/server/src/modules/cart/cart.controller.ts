@@ -51,6 +51,59 @@ export class CartController {
     return userCart;
   }
 
+
+@Post('checkout')
+@UseGuards(JwtAuthGuard)
+async postCart(@Request() req): Promise<{ message: string; response: any }> {
+  const userId = req.user.userId;
+  const cart = this.carts[userId];
+  console.log(JSON.stringify(cart));
+
+  const transformedCartItems = cart.cartItems.map(item => ({
+      part_name: item.name,  // Assuming 'name' is the part name
+      quantity: item.quantity,  // Assuming 'quantity' is the quantity
+      part_no: item.partNumber  // Assuming 'part_no' is the part number
+    }));
+    console.log(JSON.stringify(transformedCartItems));
+  if (!cart || cart.cartItems.length === 0) {
+    return {
+      message: 'Cart is empty. Cannot complete order.',
+      response: null,
+    };
+  }
+  const responses = [];
+
+  try {
+
+    for (const item of transformedCartItems) {
+      const apiResponse = await fetch('http://localhost:8000/API.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item),
+      });
+
+      const responseData = await apiResponse.json();
+      responses.push(responseData);
+    }
+
+
+    // Clear the cart after posting
+    this.carts[userId] = { cartItems: [] };
+
+    return {
+      message: 'Order posted to external API and cart cleared.',
+      response: responses,
+    };
+  } catch (error) {
+    console.error('Error posting to external API:', error);
+    return {
+      message: 'Failed to post order to external API.',
+      response: null,
+    };
+  }
+}
+
+
   @Post()
   @UseGuards(JwtAuthGuard)
   async create(@Request() req, @Body() { id }: { id: string }): Promise<Cart> {
