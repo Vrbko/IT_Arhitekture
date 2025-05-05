@@ -189,7 +189,6 @@ yarn-error.log
 
 # Ignoring Docker and docker-compose files
 docker-compose.override.yml
-Dockerfile
 
 # Ignoring compiled and build directories
 /build/
