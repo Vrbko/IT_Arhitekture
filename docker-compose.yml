@@ -58,6 +58,42 @@ services:
       - app-network
 
 
+
+  home:
+    build:
+      context: UporabnskiVmesnik/home/.
+    ports:
+      - "2999:2999"
+    restart: always
+
+  pdp:
+    build:
+      context: UporabnskiVmesnik/pdp/.
+    ports:
+      - "3001:3001"
+    restart: always
+
+  cart:
+    build:
+      context: UporabnskiVmesnik/cart/.
+    ports:
+      - "3002:3002"
+    restart: always
+  
+  addtocart:
+    build:
+      context: UporabnskiVmesnik/addtocart/.
+    ports:
+      - "3003:3003"
+    restart: always
+
+  server:
+    build:
+      context: UporabnskiVmesnik/server/.
+    ports:
+      - "8080:8080"
+    restart: always
+
 networks:
   app-network:
     driver: bridge
