@@ -12,20 +12,24 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
-    // Send login request and await the response
+    // Call the login method and get the response
     const loginResponse: LoginResponse = await this.usersService.login(username, pass).toPromise();
   
-    // Check if the login was successful
-    if (loginResponse.getSuccess) {
-      // Login was successful, now fetch the user data (without the password field, since it's not in UserResponse)
-      const user: UserResponse = await this.usersService.findOne(username).toPromise();
+    // Logging the full response for debugging purposes
+    console.log('Login response:', loginResponse);
   
-      // Return the user data (no password field exists, so just return the full response)
-      return user;
+    // Directly access 'success' and 'message' properties if it's a plain object
+    const jsonResponse = loginResponse;
+    console.log('Success:', jsonResponse["success"]);
+  
+    // Check if login was successful
+    if (jsonResponse["success"] == true) {
+      console.log("success");
+      const user: UserResponse = await this.usersService.findOne(username).toPromise();
+      return user;  // Return user data excluding password
     }
   
-    // If login fails, return null
-    return null;
+    return null;  // If login failed, return null
   }
 
   async login(user: any) {
