@@ -12,7 +12,7 @@ import { join } from 'path';
         options: {
           package: 'user', // Name of your proto package
           protoPath: join(__dirname, '..', '..', 'proto', 'user.proto'),  // Path to your .proto file
-          url: 'localhost:50051',  // Make sure this is the correct address
+          url: 'uporabniki:50051',  // Make sure this is the correct address
 
         },
       },

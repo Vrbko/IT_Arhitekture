@@ -65,6 +65,8 @@ services:
     ports:
       - "2999:2999"
     restart: always
+    networks:
+      - app-network
 
   pdp:
     build:
@@ -72,6 +74,8 @@ services:
     ports:
       - "3001:3001"
     restart: always
+    networks:
+      - app-network
 
   cart:
     build:
@@ -79,6 +83,8 @@ services:
     ports:
       - "3002:3002"
     restart: always
+    networks:
+      - app-network
   
   addtocart:
     build:
@@ -86,6 +92,8 @@ services:
     ports:
       - "3003:3003"
     restart: always
+    networks:
+      - app-network
 
   server:
     build:
@@ -93,6 +101,8 @@ services:
     ports:
       - "8080:8080"
     restart: always
+    networks:
+      - app-network
 
 networks:
   app-network:

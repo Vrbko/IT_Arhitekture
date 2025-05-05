@@ -12,7 +12,7 @@ jobs:
 
     env:
       REGISTRY: docker.io  # or docker.io for Docker Hub
-      IMAGE_OWNER: ${{ github.repository_owner }}  # change if needed
+      IMAGE_OWNER: vrbko  # change if needed
 
     steps:
       - name: Checkout code

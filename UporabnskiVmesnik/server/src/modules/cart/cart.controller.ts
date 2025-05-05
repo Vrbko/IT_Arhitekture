@@ -76,7 +76,7 @@ async postCart(@Request() req): Promise<{ message: string; response: any }> {
   try {
 
     for (const item of transformedCartItems) {
-      const apiResponse = await fetch('http://localhost:8000/API.php', {
+      const apiResponse = await fetch('http://php:8000/API.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(item),
