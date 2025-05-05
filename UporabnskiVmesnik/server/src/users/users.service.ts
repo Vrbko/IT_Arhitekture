@@ -1,27 +1,29 @@
-import { Injectable } from '@nestjs/common';
-
-export type User = {
-  userId: number;
-  username: string;
-  password: string;
-};
+import { Injectable, OnModuleInit, Inject } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
+import { UserResponse, LoginResponse } from '../../generated/user_pb';
 
 @Injectable()
-export class UsersService {
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'Bine',
-      password: '123',
-    },
-    {
-      userId: 2,
-      username: 'Janez',
-      password: '123',
-    },
-  ];
+export class UsersService implements OnModuleInit {
+  private userService: any;  // This will hold the gRPC service methods
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+  constructor(
+    @Inject('USER_PACKAGE') private client: ClientGrpc,  // Injecting the correct client
+  ) {}
+
+  onModuleInit() {
+    this.userService = this.client.getService('UserService');  // Make sure this matches the service name in your .proto file
+  }
+
+  findOne(username: string): Observable<UserResponse> {
+    return this.userService.GetUser({ username });
+  }
+
+  createUser(username: string, email: string, password: string, age: number): Observable<UserResponse> {
+    return this.userService.CreateUser({ username, email, password, age });
+  }
+
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.userService.Login({ username, password });
   }
 }

@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "ts-proto": "^2.7.0"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.3",
+    "@protobuf-ts/grpc-transport": "^2.10.0"
+  }
+}
