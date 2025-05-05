@@ -29,7 +29,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./UporabnskiVmesnik/home
-          dockerfile: ./UporabnskiVmesnik/home/Dockerfile  # Explicit path to Dockerfile
+          file: ./UporabnskiVmesnik/home/Dockerfile  # Explicit path to Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/home:latest
 
@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./UporabnskiVmesnik/pdp
-          dockerfile: ./UporabnskiVmesnik/pdp/Dockerfile  # Explicit path to Dockerfile
+          file: ./UporabnskiVmesnik/pdp/Dockerfile  # Explicit path to Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/pdp:latest
 
@@ -45,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./UporabnskiVmesnik/cart
-          dockerfile: ./UporabnskiVmesnik/cart/Dockerfile  # Explicit path to Dockerfile
+          file: ./UporabnskiVmesnik/cart/Dockerfile  # Explicit path to Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/cart:latest
 
@@ -53,7 +53,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./UporabnskiVmesnik/addtocart
-          dockerfile: ./UporabnskiVmesnik/addtocart/Dockerfile  # Explicit path to Dockerfile
+          file: ./UporabnskiVmesnik/addtocart/Dockerfile  # Explicit path to Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/addtocart:latest
 
@@ -61,6 +61,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./UporabnskiVmesnik/server
-          dockerfile: ./UporabnskiVmesnik/server/Dockerfile  # Explicit path to Dockerfile
+          file: ./UporabnskiVmesnik/server/Dockerfile  # Explicit path to Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/server:latest
