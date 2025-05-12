@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 set_time_limit(0);
 ini_set('max_execution_time', 0);
 
-$logFile = __DIR__ . '/listener.log';
+$logFile = __DIR__ . 'logs/listener.log';
 function logMessage($message) {
     global $logFile;
     $timestamp = date('Y-m-d H:i:s');

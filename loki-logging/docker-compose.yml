@@ -13,7 +13,7 @@ services:
       - /var/log:/var/log
       - ./promtail-config.yaml:/etc/promtail/promtail.yaml
       - /Users/renevrbnjak/it/Storitev_Zaloga/logs:/myapp/logs
-      - /Users/renevrbnjak/it/Storitev_Uporabniki/logs/server.log:/myapp/logs
+      - /Users/renevrbnjak/it/Storitev_Uporabniki/logs:/myapp/logs
     command: -config.file=/etc/promtail/promtail.yaml
 
   grafana:
