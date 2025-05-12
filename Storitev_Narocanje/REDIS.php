@@ -55,7 +55,7 @@ while (true) {
                 $partName = urlencode($data['part_no']);
 
                 $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, "http://zaloga:3000/parts/$partName");
+                curl_setopt($curl, CURLOPT_URL, "http://localhost:3000/parts/$partName");
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl, CURLOPT_TIMEOUT, 5);
                 curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);

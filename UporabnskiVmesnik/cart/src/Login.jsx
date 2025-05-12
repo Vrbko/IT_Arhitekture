@@ -5,8 +5,8 @@ export default function Login() {
   const loggedIn = useLoggedIn();
   const [showLogin, setShowLogin] = useState(false);
 
-  const [username, setUsername] = useState("john_doe");
-  const [password, setPassword] = useState("securepassword");
+  const [username, setUsername] = useState("rene");
+  const [password, setPassword] = useState("rene");
   
   const [errorMessage, setErrorMessage] = useState("");  // State for error message
 

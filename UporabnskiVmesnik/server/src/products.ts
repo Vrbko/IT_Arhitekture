@@ -15,7 +15,7 @@ export interface Product {
   __v?: number;
 }
 
-const API_URL = 'http://zaloga:3000/parts'; // Adjust to your actual API
+const API_URL = 'http://localhost:3000/parts'; // Adjust to your actual API
 
 /**
  * Fetch products from the API and return them as an array of Product

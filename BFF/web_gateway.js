@@ -75,4 +75,4 @@ app.post('/web/catalog', async (req, res) => {
 
 
 
-app.listen(3001, () => console.log('Web Gateway on :3001'));
+app.listen(3010, () => console.log('Web Gateway on :3010'));

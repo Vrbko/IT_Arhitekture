@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  loki:
+    image: grafana/loki:2.9.2
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  promtail:
+    image: grafana/promtail:2.9.2
+    volumes:
+      - /var/log:/var/log
+      - ./promtail-config.yaml:/etc/promtail/promtail.yaml
+      - /Users/renevrbnjak/it/Storitev_Zaloga/logs:/myapp/logs
+      - /Users/renevrbnjak/it/Storitev_Uporabniki/logs/server.log:/myapp/logs
+    command: -config.file=/etc/promtail/promtail.yaml
+
+  grafana:
+    image: grafana/grafana:10.3.1
+    ports:
+      - "3101:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "9000:9000"  # Port for Portainer UI
+      - "9001:8000"  # Port for Portainer agent (optional, only if you plan to use Portainer agents)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Docker socket for accessing Docker daemon
+      - portainer_data:/data  # Persistent data storage for Portainer
+    restart: unless-stopped
+
+volumes:
+  grafana-storage:
+  portainer_data:  # This volume will store Portainer's data persistently
