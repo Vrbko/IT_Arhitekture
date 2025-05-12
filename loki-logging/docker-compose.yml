@@ -14,6 +14,8 @@ services:
       - ./promtail-config.yaml:/etc/promtail/promtail.yaml
       - /Users/renevrbnjak/it/Storitev_Zaloga/logs:/myapp/logs
       - /Users/renevrbnjak/it/Storitev_Uporabniki/logs:/myapp/logs
+      - /Users/renevrbnjak/it/Storitev_Narocanje/logs:/myapp/logs
+      - /Users/renevrbnjak/it/UporabnskiVmesnik/logs:/myapp/logs
     command: -config.file=/etc/promtail/promtail.yaml
 
   grafana:
