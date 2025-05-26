@@ -64,3 +64,27 @@ jobs:
           file: ./UporabnskiVmesnik/server/Dockerfile  # Explicit path to Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/server:latest
+
+      - name: Build and push zaloga image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./Storitev_Zaloga/
+          file: ./Storitev_Zaloga/Dockerfile  # Explicit path to Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/zaloga:latest
+
+      - name: Build and push uporabniki image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./Storitev_Uporabniki/
+          file: ./Storitev_Uporabniki/Dockerfile  # Explicit path to Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/uporabniki:latest
+
+      - name: Build and push narocanje image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./Storitev_Narocanje/
+          file: ./Storitev_Narocanje/Dockerfile  # Explicit path to Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/narocanje:latest
