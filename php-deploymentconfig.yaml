@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: php
+  name: php
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: php
+  template:
+    metadata:
+      labels:
+        io.kompose.service: php
+    spec:
+      containers:
+        - image: ' '
+          name: php
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - php
+        from:
+          kind: ImageStreamTag
+          name: php:latest
+      type: ImageChange

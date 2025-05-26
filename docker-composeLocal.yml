@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   zaloga:
-    image: vrbko/zaloga:latest  # Pull image from Docker Hub
+    build:
+      context: Storitev_Zaloga/. # Builds the Dockerfile in the current directory
     ports:
       - "3000:3000" # Expose port 5000 on the host machine
     environment:
@@ -11,7 +12,8 @@ services:
       - app-network
 
   uporabniki:
-    image: vrbko/uporabniki:latest  # Pull image from Docker Hub
+    build:
+      context: Storitev_Uporabniki/.
     ports:
       - "50051:50051"
     networks:
@@ -20,6 +22,7 @@ services:
 
   redis:
     image: redis:latest
+    container_name: redis-server
     ports:
       - "6379:6379" # Expose Redis on port 6379
     volumes:
@@ -31,8 +34,9 @@ services:
     
 
   php:
-    image: vrbko/narocanje:latest  # Pull image from Docker Hub
-
+    build:
+      context: Storitev_Narocanje/.
+    container_name: php-app
     ports:
       - "8000:80"  # Expose PHP app on port 8000
     depends_on:
@@ -42,6 +46,7 @@ services:
 
   mysql:
     image: mysql:8.0
+    container_name: mysql-db
     environment:
       MYSQL_ROOT_PASSWORD: vrbko  # Change this to a secure password
       MYSQL_DATABASE: autodeli  # This creates the initial 'autodeli' database
@@ -55,8 +60,8 @@ services:
 
 
   home:
-    image: vrbko/home:latest  # Pull image from Docker Hub
-
+    build:
+      context: UporabnskiVmesnik/home/.
     ports:
       - "2999:2999"
     restart: always
@@ -64,8 +69,8 @@ services:
       - app-network
 
   pdp:
-    image: vrbko/pdp:latest  # Pull image from Docker Hub
-
+    build:
+      context: UporabnskiVmesnik/pdp/.
     ports:
       - "3001:3001"
     restart: always
@@ -73,8 +78,8 @@ services:
       - app-network
 
   cart:
-    image: vrbko/cart:latest  # Pull image from Docker Hub
-
+    build:
+      context: UporabnskiVmesnik/cart/.
     ports:
       - "3002:3002"
     restart: always
@@ -82,8 +87,8 @@ services:
       - app-network
   
   addtocart:
-    image: vrbko/addtocart:latest  # Pull image from Docker Hub
-
+    build:
+      context: UporabnskiVmesnik/addtocart/.
     ports:
       - "3003:3003"
     restart: always
@@ -91,8 +96,8 @@ services:
       - app-network
 
   server:
-    image: vrbko/server:latest  # Pull image from Docker Hub
-
+    build:
+      context: UporabnskiVmesnik/server/.
     ports:
       - "8080:8080"
     restart: always

@@ -1,0 +1,36 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: zaloga
+  name: zaloga
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: zaloga
+  template:
+    metadata:
+      labels:
+        io.kompose.service: zaloga
+    spec:
+      containers:
+        - env:
+            - name: MONGO_URI
+              value: mongodb+srv://vrbko:4ZPHrHgedXoX9TVY@projekt.0habu.mongodb.net/?retryWrites=true&w=majority&appName=Projekt
+          image: ' '
+          name: zaloga
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - zaloga
+        from:
+          kind: ImageStreamTag
+          name: zaloga:latest
+      type: ImageChange

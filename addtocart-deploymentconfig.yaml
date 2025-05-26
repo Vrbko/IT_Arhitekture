@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: addtocart
+  name: addtocart
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: addtocart
+  template:
+    metadata:
+      labels:
+        io.kompose.service: addtocart
+    spec:
+      containers:
+        - image: ' '
+          name: addtocart
+          ports:
+            - containerPort: 3003
+              protocol: TCP
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - addtocart
+        from:
+          kind: ImageStreamTag
+          name: addtocart:latest
+      type: ImageChange

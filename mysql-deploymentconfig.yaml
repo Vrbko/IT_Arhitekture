@@ -1,0 +1,51 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: mysql
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: mysql
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: autodeli
+            - name: MYSQL_ROOT_PASSWORD
+              value: vrbko
+          image: ' '
+          name: mysql
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d/init.sql
+              name: mysql-cm0
+              subPath: init.sql
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            items:
+              - key: init.sql
+                path: init.sql
+            name: mysql-cm0
+          name: mysql-cm0
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - mysql
+        from:
+          kind: ImageStreamTag
+          name: mysql:8.0
+      type: ImageChange

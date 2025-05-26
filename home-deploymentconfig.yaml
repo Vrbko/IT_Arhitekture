@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: home
+  name: home
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: home
+  template:
+    metadata:
+      labels:
+        io.kompose.service: home
+    spec:
+      containers:
+        - image: ' '
+          name: home
+          ports:
+            - containerPort: 2999
+              protocol: TCP
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - home
+        from:
+          kind: ImageStreamTag
+          name: home:latest
+      type: ImageChange

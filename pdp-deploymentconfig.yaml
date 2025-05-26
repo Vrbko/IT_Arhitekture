@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: pdp
+  name: pdp
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: pdp
+  template:
+    metadata:
+      labels:
+        io.kompose.service: pdp
+    spec:
+      containers:
+        - image: ' '
+          name: pdp
+          ports:
+            - containerPort: 3001
+              protocol: TCP
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - pdp
+        from:
+          kind: ImageStreamTag
+          name: pdp:latest
+      type: ImageChange

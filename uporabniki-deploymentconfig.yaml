@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: uporabniki
+  name: uporabniki
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: uporabniki
+  template:
+    metadata:
+      labels:
+        io.kompose.service: uporabniki
+    spec:
+      containers:
+        - image: ' '
+          name: uporabniki
+          ports:
+            - containerPort: 50051
+              protocol: TCP
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - uporabniki
+        from:
+          kind: ImageStreamTag
+          name: uporabniki:latest
+      type: ImageChange

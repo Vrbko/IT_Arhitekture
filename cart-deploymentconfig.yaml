@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: cart
+  name: cart
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: cart
+  template:
+    metadata:
+      labels:
+        io.kompose.service: cart
+    spec:
+      containers:
+        - image: ' '
+          name: cart
+          ports:
+            - containerPort: 3002
+              protocol: TCP
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - cart
+        from:
+          kind: ImageStreamTag
+          name: cart:latest
+      type: ImageChange

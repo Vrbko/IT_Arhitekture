@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: uporabniki
+  name: uporabniki
+spec:
+  ports:
+    - name: "50051"
+      port: 50051
+      targetPort: 50051
+  selector:
+    io.kompose.service: uporabniki
