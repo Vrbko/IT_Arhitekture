@@ -27,17 +27,13 @@ spec:
             - containerPort: 3306
               protocol: TCP
           volumeMounts:
-            - mountPath: /docker-entrypoint-initdb.d/init.sql
-              name: mysql-cm0
-              subPath: init.sql
+            - mountPath: /var/lib/mysql
+              name: mysql-data
       restartPolicy: Always
       volumes:
-        - configMap:
-            items:
-              - key: init.sql
-                path: init.sql
-            name: mysql-cm0
-          name: mysql-cm0
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data
   test: false
   triggers:
     - type: ConfigChange

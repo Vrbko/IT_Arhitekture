@@ -19,6 +19,6 @@ RUN pip install --upgrade pip==25.0.1 && \
 
 # Expose the necessary port for your service
 EXPOSE 50051
-
+RUN mkdir -p /logs && chmod -R 777 /logs
 # Command to run the application
 CMD ["python", "server.py"]

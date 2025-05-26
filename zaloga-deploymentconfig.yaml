@@ -16,7 +16,7 @@ spec:
       containers:
         - env:
             - name: MONGO_URI
-              value: mongodb+srv://vrbko:4ZPHrHgedXoX9TVY@projekt.0habu.mongodb.net/?retryWrites=true&w=majority&appName=Projekt
+              value: mongodb://mysql:3306/autodeli
           image: ' '
           name: zaloga
           ports:

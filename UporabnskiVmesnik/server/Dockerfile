@@ -15,6 +15,6 @@ COPY . .
 
 # Expose the port your app runs on (adjust if needed)
 EXPOSE 8080
-
+RUN mkdir -p /app/dist && chmod -R 777 /app/dist
 # Start the app
 CMD ["yarn", "start"]
