@@ -12,8 +12,7 @@ logging.basicConfig(
     level=logging.DEBUG,  # Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     format='%(asctime)s - %(levelname)s - %(message)s',  # Log format
     handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('logs/server.log')
+        logging.StreamHandler()
             # You can log to the console or to a file, e.g. logging.FileHandler('server.log')
     ]
 )

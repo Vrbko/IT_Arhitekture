@@ -1,42 +1,6 @@
 version: '3.8'
 
 services:
-  zaloga:
-    image: vrbko/zaloga:latest
-    ports:
-      - "3000:3000"
-    environment:
-      - MONGO_URI=mongodb://mysql:3306/autodeli
-
-  uporabniki:
-    image: vrbko/uporabniki:latest
-    ports:
-      - "50051:50051"
-
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-
-  php:
-    image: vrbko/narocanje:latest
-    ports:
-      - "8000:80"
-    depends_on:
-      - redis
-
-  mysql:
-    image: mysql:8.0
-    environment:
-      - MYSQL_ROOT_PASSWORD=vrbko
-      - MYSQL_DATABASE=autodeli
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    # ⚠️ Mounting init.sql is not compatible with Kompose/OpenShift, handled separately
 
   home:
     image: vrbko/home:latest
@@ -68,6 +32,3 @@ services:
       - "8080:8080"
     restart: always
 
-volumes:
-  redis-data:
-  mysql-data:

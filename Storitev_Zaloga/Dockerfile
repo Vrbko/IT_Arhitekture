@@ -1,20 +1,29 @@
-# Use the official Node.js image from the Docker Hub
-FROM node:16
+FROM node:18
 
-# Set the working directory inside the container
-WORKDIR /usr/src/app
+# Create a non-root writable app directory
+WORKDIR /app
 
-# Copy package.json and package-lock.json for installing dependencies
+# Ensure npm doesn't try to use root-owned /.npm
+ENV NPM_CONFIG_CACHE=/app/.npm
+
+# Copy package files and install dependencies
 COPY package*.json ./
 
-# Install project dependencies
+# Create writable npm cache directory
+RUN mkdir -p /app/.npm && chmod -R 777 /app/.npm
+
+# Install dependencies
 RUN npm install
 
-# Copy the rest of your application code
+# Copy the rest of the app
 COPY . .
 
-# Expose the port the app will run on
+# Make everything writable by arbitrary UID
+RUN chmod -R 777 /app
+RUN chmod -R 777 /.npm
+RUN sudo chown -R 1004370000:0 "/.npm"
+# Expose if needed
 EXPOSE 3000
 
-# Set the command to run your app
+# Run the app
 CMD ["npm", "start"]
